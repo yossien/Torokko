@@ -1,19 +1,19 @@
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import firebase from 'firebase/app'
+import {useEffect, useState} from 'react'
+import {useRouter} from 'next/router'
+import firebase, {User} from 'firebase/app'
 import 'firebase/auth'
-import initFirebase from '../auth/initFirebase'
+import initFirebase from './initFirebase'
 import {
   removeUserCookie,
   setUserCookie,
   getUserFromCookie,
 } from './userCookies'
-import { mapUserData } from './mapUserData'
+import {mapUserData} from './mapUserData'
 
 initFirebase()
 
 const useUser = () => {
-  const [user, setUser] = useState()
+  const [user, setUser] = useState<User | null>()
   const router = useRouter()
 
   const logout = async () => {
@@ -40,7 +40,7 @@ const useUser = () => {
         setUser(userData)
       } else {
         removeUserCookie()
-        setUser()
+        setUser(null)
       }
     })
 
@@ -57,7 +57,7 @@ const useUser = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return { user, logout }
+  return {user, logout}
 }
 
-export { useUser }
+export {useUser}
