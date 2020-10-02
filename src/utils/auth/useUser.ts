@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import {useRouter} from 'next/router'
-import firebase, {User} from 'firebase/app'
+import firebase from 'firebase/app'
 import 'firebase/auth'
 import initFirebase from './initFirebase'
 import {
@@ -9,11 +9,12 @@ import {
   getUserFromCookie,
 } from './userCookies'
 import {mapUserData} from './mapUserData'
+import {mappedUserDataType} from "../../interfaces";
 
 initFirebase()
 
 const useUser = () => {
-  const [user, setUser] = useState<{} | null>()
+  const [user, setUser] = useState<mappedUserDataType | null>()
   const router = useRouter()
 
   const logout = async () => {
