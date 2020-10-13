@@ -1,18 +1,26 @@
 import * as functions from "firebase-functions"
-import next from "next"
+// import next from "next"
+import express from "express"
+import cors from "cors"
+import helloRouter from "./router/hello";
 
-const dev = process.env.NODE_ENV !== 'production'
-const distDir = "_next"
+// const dev = process.env.NODE_ENV !== 'production'
 
-const app = next({dev, conf: {distDir}})
+// const app = next({dev})
 
-const handle = app.getRequestHandler()
+// const handle = app.getRequestHandler()
 
-const nextApp = functions.https.onRequest((req, res) => {
-  return app.prepare().then(() => {
-    console.log(req.originalUrl)
-    return handle(req, res)
-  })
+// For Page Host.(SSR)
+/*
+export const nextApp = functions.https.onRequest(async (req, res) => {
+  await app.prepare()
+  return handle(req, res)
 })
+*/
 
-export default nextApp
+// For API.
+const server = express()
+server.use(cors({origin: false}))
+server.use('/hello', helloRouter)
+
+exports.api = functions.https.onRequest(server)

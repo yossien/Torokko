@@ -1,22 +1,5 @@
 module.exports = {
-  distDir: '../../dist/functions/_next',
-  //target: 'serverless',
-  webpack: (config, options) => {
-    const {dev, isServer, buildId, dir} = options
-    config.module.rules.push({
-      oneOf: [
-        {
-          test: /\.(js|mjs|jsx|ts|tsx)$/,
-          include: dir,
-          exclude: /node_modules/,
-          use: [{
-            loader: 'ts-loader'
-          }]
-        }
-      ]
-    })
-    return config
-  },
+  distDir: '../../dist/functions/.next',
   env: {
     FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
     FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
