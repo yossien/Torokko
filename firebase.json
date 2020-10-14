@@ -16,20 +16,23 @@
       },
       {
         "source": "**",
-        "destination": "/index.html"
+        "function": "nextApp"
       }
     ]
   },
   "functions": {
     "source": "dist/functions",
     "predeploy": [
+      "rimraf \"pages\"",
+      "npm run clean",
       "npm run lint-functions",
       "npm run lint-app",
       "npm run typecheck-app",
       "npm run build-app",
       "npm run build-functions",
       "npm run copy-app-deps",
-      "npm run copy-functions-deps"
+      "npm run copy-functions-deps",
+      "cpx \"dist/functions/.next/server/pages/**/*\" \"pages\""
     ],
     "runtime": "nodejs10"
   }

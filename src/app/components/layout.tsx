@@ -4,10 +4,12 @@ import {Footer} from "./footer";
 import {makeStyles} from "@material-ui/core/styles";
 import {Fab, useScrollTrigger, Zoom} from "@material-ui/core";
 import {KeyboardArrowUp} from "@material-ui/icons";
+import Head from "next/head";
 
 interface Props {
   window?: () => Window
   children: React.ReactElement
+  title: string
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -51,6 +53,14 @@ export const Layout = (props: Props) => {
 
   return (
     <>
+      <Head>
+        <title>{props.title}</title>
+        <meta charSet="utf-8"/>
+        {/* Use minimum-scale=1 to enable GPU rasterization */}
+        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"/>
+        <link rel='preload' as='style' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500'/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"/>
+      </Head>
       <Header />
       <div id="back-to-top-anchor"/>
       {props.children}

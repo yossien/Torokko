@@ -6,7 +6,7 @@ import Box from "@material-ui/core/Box";
 const Index = () => {
 
   return (
-    <Layout>
+    <Layout title="Top page.">
       <Container component="main" maxWidth="xs">
         <Box style={{height: 1800}}>
           <p>Index Page.</p>
