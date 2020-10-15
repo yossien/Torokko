@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next dev \"src/app\"",
     "preserve": "npm run preserve-app && npm run preserve-functions",
-    "preserve-app": "npm run clean && npm run build-app",
+    "preserve-app": "npm run clean && npm run build-app && npm run build-public",
     "preserve-functions": "npm run build-functions && npm run copy-functions-deps && npm run install-deps",
     "export": "next export \"src/app\" -o \"dist/public\"",
     "serve-app": "cross-env NODE_ENV=production firebase serve --only hosting",

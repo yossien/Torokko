@@ -29,6 +29,7 @@
       "npm run lint-app",
       "npm run typecheck-app",
       "npm run build-app",
+      "npm run build-public",
       "npm run build-functions",
       "npm run copy-app-deps",
       "npm run copy-functions-deps",
