@@ -4,6 +4,7 @@ import {ThemeProvider} from "@material-ui/styles";
 import {CssBaseline} from "@material-ui/core";
 import theme from "../theme";
 import App from "next/app";
+import {appWithTranslation} from "../../../i18n"
 
 class MyApp extends App {
 
@@ -30,4 +31,6 @@ class MyApp extends App {
   }
 }
 
-export default MyApp
+MyApp.getInitialProps = async (appContext) => ({...await App.getInitialProps(appContext)})
+
+export default appWithTranslation(MyApp)

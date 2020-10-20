@@ -20,8 +20,8 @@ exports.nextApp = functions.https.onRequest(async (req, res) => {
 })
 
 // For API.
-const server = express()
-server.use(cors({origin: false}))
-server.use('/hello', helloRouter)
+const apiServer = express()
+apiServer.use(cors({origin: false}))
+apiServer.use('/hello', helloRouter)
 
-exports.api = functions.https.onRequest(server)
+exports.api = functions.https.onRequest(apiServer)

@@ -225,4 +225,5 @@ $RECYCLE.BIN/
 
 dist
 src/app/.next
-pages
+/pages
+/public

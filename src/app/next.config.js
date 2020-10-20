@@ -1,5 +1,12 @@
+const {nextI18NextRewrites} = require('next-i18next/rewrites')
+const localeSubpaths = {}
+
 module.exports = {
   distDir: '../../dist/functions/.next',
+  rewrites: async () => nextI18NextRewrites(localeSubpaths),
+  publicRuntimeConfig: {
+    localeSubpaths,
+  },
   env: {
     FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
     FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
