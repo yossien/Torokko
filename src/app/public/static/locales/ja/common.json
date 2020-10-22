@@ -1,3 +1,9 @@
 {
-  "greeting": "こんにちは"
+  "greeting": "こんにちは",
+  "login": "ログイン",
+  "sign-up": "アカウント登録",
+  "email-address": "メールアドレス",
+  "password": "パスワード",
+  "home_screen": "ホーム画面",
+  "message": "メッセージ"
 }

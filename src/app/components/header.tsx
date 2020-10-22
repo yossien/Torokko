@@ -6,8 +6,9 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import {AccountCircleOutlined, MenuOutlined} from "@material-ui/icons";
 import Typography from "@material-ui/core/Typography";
-import AppConfig from "../AppConfig";
 import AppMenu from "./AppMenu";
+import {withTranslation} from "../../../i18n";
+import {TFunction} from "next-i18next";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,11 +23,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export const Header = () => {
+const Header = ({t}: { readonly t: TFunction }) => {
 
-  const [opened, setOpen] = useState<boolean>(false)
+  const [menuOpened, setMenuOpen] = useState<boolean>(false)
 
-  const toggleDrawer = (_opened: boolean) => (
+  const toggleMenuDrawer = (_opened: boolean) => (
     event: React.KeyboardEvent | React.MouseEvent,) => {
 
     if (event.type === 'keydown' &&
@@ -36,7 +37,7 @@ export const Header = () => {
       return
     }
 
-    setOpen(_opened)
+    setMenuOpen(_opened)
   }
 
   // const {user} = userAuth()
@@ -50,13 +51,13 @@ export const Header = () => {
           <IconButton
             edge="start"
             className={classes.menuButton}
-            onClick={toggleDrawer(true)}
+            onClick={toggleMenuDrawer(true)}
             color="inherit"
             aria-label="menu">
             <MenuOutlined/>
           </IconButton>
           <Typography variant="h1" className={classes.title}>
-            {AppConfig.AppName}
+            {t('app_name')}
           </Typography>
           <IconButton color="inherit" aria-label="user">
             <AccountCircleOutlined/>
@@ -64,11 +65,15 @@ export const Header = () => {
         </Toolbar>
       </AppBar>
       <Toolbar/>
-      <Drawer anchor="left" open={opened} onClose={toggleDrawer(false)}>
+      <Drawer anchor="left" open={menuOpened} onClose={toggleMenuDrawer(false)}>
         <AppMenu/>
       </Drawer>
     </div>
   )
 }
 
-export default Header
+Header.getInitialProps = async () => ({
+  namespacesRequired: ['header'],
+})
+
+export default withTranslation('header')(Header)

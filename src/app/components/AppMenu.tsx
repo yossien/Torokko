@@ -2,7 +2,8 @@ import {makeStyles} from "@material-ui/styles";
 import {List, ListItem, ListItemIcon, ListItemText} from "@material-ui/core";
 import AppConfig from "../AppConfig";
 import React from "react";
-import {BookOutlined, MailOutlined} from "@material-ui/icons";
+import {withTranslation} from "../../../i18n"
+import {TFunction} from "next-i18next";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -10,19 +11,7 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-const getIcon = (name: string) => {
-  if (name === 'book') {
-    return (
-      <BookOutlined/>
-    )
-  } else {
-    return (
-      <MailOutlined/>
-    )
-  }
-}
-
-export const AppMenu = () => {
+export const AppMenu = ({t}: {readonly t: TFunction}) => {
 
   const classes = useStyles()
 
@@ -30,12 +19,12 @@ export const AppMenu = () => {
     return (
       <div className={classes.root}>
         <List>
-          {AppConfig.AppMenuList.map(({name, icon},index) => (
+          {AppConfig.AppMenuList.map(({name, icon}, index) => (
             <ListItem button key={index}>
               <ListItemIcon>
-                {getIcon(icon)}
+                {icon}
               </ListItemIcon>
-              <ListItemText primary={name}/>
+              <ListItemText primary={t(name)}/>
             </ListItem>
           ))}
         </List>
@@ -50,4 +39,4 @@ export const AppMenu = () => {
   )
 }
 
-export default AppMenu
+export default withTranslation('menu')(AppMenu)

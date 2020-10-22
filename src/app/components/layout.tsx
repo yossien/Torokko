@@ -1,15 +1,18 @@
 import React from "react";
-import {Header} from "./header";
+import Header from "./header";
 import {Footer} from "./footer";
 import {makeStyles} from "@material-ui/core/styles";
 import {Fab, useScrollTrigger, Zoom} from "@material-ui/core";
 import {KeyboardArrowUp} from "@material-ui/icons";
 import Head from "next/head";
+import {TFunction} from "next-i18next";
+import {withTranslation} from "../../../i18n"
 
 interface Props {
   window?: () => Window
   children: React.ReactElement
   title: string
+  t: TFunction
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -51,10 +54,12 @@ function ScrollTop(props: Props) {
 
 export const Layout = (props: Props) => {
 
+  const {t} = props
+
   return (
     <>
       <Head>
-        <title>{props.title}</title>
+        <title>{t('app_name')} | {props.title}</title>
         <meta charSet="utf-8"/>
         {/* Use minimum-scale=1 to enable GPU rasterization */}
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"/>
@@ -74,4 +79,8 @@ export const Layout = (props: Props) => {
   )
 }
 
-export default Layout
+Layout.getInitialProps = async () => ({
+  namespacesRequired: ['header']
+})
+
+export default withTranslation('header')(Layout)

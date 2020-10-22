@@ -1,3 +1,9 @@
 {
-  "greeting": "Hello!!"
+  "greeting": "Hello!!",
+  "login": "LOG IN",
+  "sign-up": "SIGN UP",
+  "email-address": "Email Address",
+  "password": "PASSWORD",
+  "home_screen": "HOME",
+  "message": "Message"
 }

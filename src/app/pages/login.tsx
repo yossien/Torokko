@@ -6,6 +6,8 @@ import {makeStyles} from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import {LockOutlined} from "@material-ui/icons";
 import Typography from "@material-ui/core/Typography";
+import {withTranslation} from "../../../i18n";
+import {TFunction} from "next-i18next";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -27,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Login = (_props: any) => {
+const Login = ({t}: { readonly t: TFunction }) => {
 
   const [email, setEmail] = useState('')
   const [pass, setPass] = useState('')
@@ -38,25 +40,25 @@ const Login = (_props: any) => {
   return (
 
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
+      <CssBaseline/>
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlined/>
         </Avatar>
         <Typography component="h1">
-          Log in.
+          {t('login')}
         </Typography>
       </div>
-        <Link href={"/"}>
-          Home.
-        </Link>
+      <Link href={"/"}>
+        {t('home_screen')}
+      </Link>
       <form className={classes.form} noValidate>
         <TextField
           id="email"
           onChange={(e) => {
             setEmail(e.target.value)
           }}
-          label="Email Address"
+          label={t('email-address')}
           margin="normal"
           value={email}
           variant="outlined"
@@ -71,7 +73,7 @@ const Login = (_props: any) => {
           onChange={(e) => {
             setPass(e.target.value)
           }}
-          label="password"
+          label={t('password')}
           margin="normal"
           value={pass}
           variant="outlined"
@@ -94,7 +96,7 @@ const Login = (_props: any) => {
           variant="contained"
           fullWidth
           color="primary">
-          Log in.
+          {t('login')}
         </Button>
         <Button
           onClick={async () => {
@@ -112,15 +114,19 @@ const Login = (_props: any) => {
           fullWidth
           color="secondary"
         >
-          create Account
+          {t('sign-up')}
         </Button>
       </form>
       <Box>
-        message: {message}
+        {t('message')} : {message}
       </Box>
     </Container>
   )
 
 }
 
-export default Login
+Login.getInitialProps = async () => ({
+  namespacesRequired: ['common']
+})
+
+export default withTranslation('common')(Login)

@@ -4,12 +4,13 @@ import ServerStyleSheets from "@material-ui/styles/ServerStyleSheets";
 import Head from "next/head";
 import flush from "styled-jsx/server"
 import AppConfig from "../AppConfig";
+import {i18n} from "../../../i18n"
 
 class CustomDocument extends Document {
 
   render() {
     return (
-      <Html lang="ja">
+      <Html lang={i18n.language}>
         <Head><title>{AppConfig.AppName}</title></Head>
         <body>
         <Main/>
