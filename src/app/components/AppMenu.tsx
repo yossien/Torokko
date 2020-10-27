@@ -7,7 +7,7 @@ import {TFunction} from "next-i18next";
 
 const useStyles = makeStyles(() => ({
   root: {
-    width: 250,
+    minWidth: 320,
   }
 }))
 

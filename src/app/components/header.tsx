@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import AppMenu from "./AppMenu";
 import {withTranslation} from "../../../i18n";
 import {TFunction} from "next-i18next";
+import UserPanel from "./UserPanel";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 const Header = ({t}: { readonly t: TFunction }) => {
 
   const [menuOpened, setMenuOpen] = useState<boolean>(false)
+  const [userPanelOpened, setUserPanelOpen] = useState<boolean>(false)
 
   const toggleMenuDrawer = (_opened: boolean) => (
     event: React.KeyboardEvent | React.MouseEvent,) => {
@@ -38,6 +40,19 @@ const Header = ({t}: { readonly t: TFunction }) => {
     }
 
     setMenuOpen(_opened)
+  }
+
+  const toggleUserPanel = (_opened: boolean) => (
+    event: React.KeyboardEvent | React.MouseEvent,) => {
+
+    if (event.type === 'keydown' &&
+      ((event as React.KeyboardEvent).key === 'Tab' ||
+        (event as React.KeyboardEvent).key === 'Shift')
+    ) {
+      return
+    }
+
+    setUserPanelOpen(_opened)
   }
 
   // const {user} = userAuth()
@@ -59,7 +74,11 @@ const Header = ({t}: { readonly t: TFunction }) => {
           <Typography variant="h1" className={classes.title}>
             {t('app_name')}
           </Typography>
-          <IconButton color="inherit" aria-label="user">
+          <IconButton
+            color="inherit"
+            laria-label="user"
+            onClick={toggleUserPanel(true)}
+          >
             <AccountCircleOutlined/>
           </IconButton>
         </Toolbar>
@@ -67,6 +86,9 @@ const Header = ({t}: { readonly t: TFunction }) => {
       <Toolbar/>
       <Drawer anchor="left" open={menuOpened} onClose={toggleMenuDrawer(false)}>
         <AppMenu/>
+      </Drawer>
+      <Drawer anchor="right" open={userPanelOpened} onClose={toggleUserPanel(false)}>
+        <UserPanel/>
       </Drawer>
     </div>
   )

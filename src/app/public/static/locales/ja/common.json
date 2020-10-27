@@ -1,6 +1,7 @@
 {
   "greeting": "こんにちは",
   "login": "ログイン",
+  "logout": "ログアウト",
   "sign-up": "アカウント登録",
   "email-address": "メールアドレス",
   "password": "パスワード",
